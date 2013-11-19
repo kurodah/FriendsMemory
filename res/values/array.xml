@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<resources>  
+  
+<string-array name="age_List">  
+ 	<item>10代</item>  
+ 	<item>20代</item>  
+ 	<item>30代</item>
+ 	<item>40代</item>
+ 	<item>50代</item>  
+</string-array>  
+  
+</resources> 

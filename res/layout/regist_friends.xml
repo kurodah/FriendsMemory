@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/scroll_view"  
+	android:layout_width="fill_parent"  
+	android:layout_height="fill_parent"> 
+	
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- 以下を追加します -->
+       
+	<TextView
+		android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="32sp"
+        android:text="友達登録画面" />
+        
+   <CheckBox android:id="@+id/favoriteCheck"
+      	android:layout_width="wrap_content"
+      	android:layout_height="wrap_content"
+    	android:text="お気に入りに追加する"
+    	 									/>     
+
+	<TextView
+		android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="24sp"
+        android:text="お名前" />
+     
+        
+    <EditText android:id="@+id/friends_name"
+    	android:layout_width="250dp"
+        android:layout_height="wrap_content" />
+        
+	<TextView
+		android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="24sp"
+        android:text="年代" />        
+        
+ 	<Spinner    
+ 		android:id="@+id/age_list"    
+ 		android:layout_width="wrap_content"    
+ 		android:layout_height="wrap_content"    
+ 		android:entries="@array/age_List"    
+ 		/> 
+ 		
+	<TextView
+		android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="left"
+        android:textSize="24sp"
+        android:text="性別" />
+
+
+    <RadioGroup
+  	    android:id="@+id/sex_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    	<RadioButton android:id="@+id/man"
+        	android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男" />
+
+        <RadioButton android:id="@+id/woman"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女" />
+  	</RadioGroup> 	
+ 		
+	<TextView
+		android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="24sp"
+        android:text="会った場所" />
+     
+        
+    <EditText android:id="@+id/place"
+    	android:layout_width="250dp"
+        android:layout_height="wrap_content" />    
+ 		
+ 		
+    
+	<TextView
+		android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="24sp"
+        android:text="メモ" />
+     
+        
+    <EditText android:id="@+id/friends_memo"
+    	android:layout_width="250dp"
+        android:layout_height="wrap_content" />    
+
+  <Button
+     android:id="@+id/register"
+     android:layout_marginTop="20dp"
+     android:layout_width="180dp"
+     android:layout_height="wrap_content" 
+     android:text="登録する"/>  
+</LinearLayout>
+</ScrollView>
+
+
+
+
+
+
+
+
+
+
+  	
