@@ -1,6 +1,9 @@
 package com.sample.friends;
 
+import com.sample.dao.RegistFriendsDao;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -130,15 +133,11 @@ public class RegistFriendsActivity extends Activity {
 							sex = 1;
 						}
 						
+						RegistFriendsDao regFriendsDao = new RegistFriendsDao();
+						Context con = RegistFriendsActivity.this;
+						regFriendsDao.registDB(con,friendsName,meetPlace,friendsMemo,favoriteFlg,age,sex);
 						
-						//SQLÇ≈DBÇ…í«â¡
-						String insertSQL = "insert into friendsList(friendsName,meetPlace,friendsMemo,favoriteFlg,age,sex)" +
-								"values('" + friendsName + "','"+ meetPlace + "','" + friendsMemo 
-											+ "','" +  favoriteFlg  + "','"  +  age  + "','"+ sex +  "')";
-						System.out.println(insertSQL);
-						db.execSQL(insertSQL);
-						
-						
+											
 						//ToastÇ≈ï\é¶ópÇ…â¡çH
 						friendsName = friendsName + "Ç≥ÇÒÇí«â¡ÇµÇ‹ÇµÇΩÅB";
 											
