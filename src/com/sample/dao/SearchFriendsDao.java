@@ -30,29 +30,38 @@ public class SearchFriendsDao extends Activity{
 		int favoriteFlg;
 
 
-    	// Test�f�[�^
+    	// Test�f�[�^
         List<FriendsListEntity> friendsList = null;
    
         try {
         		
-        	//DB�g�p�̏���
+        	//DB�g�p�̏���
         	db = helper.getWritableDatabase();
         		
-        	//SQL���̏����Ǝ��s
+        	//SQL���̏����Ǝ��s
 			String searchResultSQL = "select * from friendsList where age="
 					+ "'" + searchAge + "' and sex = '" + searchSex + "'";
         	c = db.rawQuery(searchResultSQL, null);
-        		
+        	
+        	// @sugiim LOOPに入る前に必要な変数を宣言しておく。
+        	// FriendsListEntity friendsListEntity = null;
+
+        	
         	while (c.moveToNext()) {				
         	    
                 if (friendsList == null) {
                 	friendsList = new ArrayList<FriendsListEntity>();
                 }
         	    
-                
+                // @sugiim LOOPが始まる前に変数は宣言（領域を確保）しておき、
+                // ここでは初期化のみを行う
+                // friendsListEntity = new FriendsListEntity();
                 FriendsListEntity friendsListEntity = null;
                 friendsListEntity = new FriendsListEntity();
                 
+                // @sugiim Stringを取り出してsetするのは１行で書ける。以下のような書き方でよい。
+        		// friendsListEntity.setFriendsID(c.getString(c.getColumnIndex("_id")));
+                // Stringの領域がムダ。
                 
         		friendsID = c.getString(c.getColumnIndex("_id"));
         		friendsName = c.getString(c.getColumnIndex("lat"));
@@ -70,7 +79,10 @@ public class SearchFriendsDao extends Activity{
         	}
         
         } catch (Exception e) {
-        
+        	// @sugiim 何もしないのはありえない...。エラーに気がつかないため。
+        	// log出力、Exceptionのthrowwすべき
+        	// System.out.println(e);
+        	// throw e;
         } finally {
         	if (c != null) {
         		c.close();

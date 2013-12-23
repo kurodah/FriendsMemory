@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class RegistFriendsActivity extends Activity {
 	
-	//SQLiteDatabase‚Ì’è‹`
+	//SQLiteDatabaseï¿½Ì’ï¿½`
 	CreateProductHelper helper = null;
     SQLiteDatabase db = null;	
 	
@@ -29,41 +29,41 @@ public class RegistFriendsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.regist_friends);
 		
-		// ƒ{ƒ^ƒ“‚Ì“Á’è
+		// ï¿½{ï¿½^ï¿½ï¿½ï¿½Ì“ï¿½ï¿½ï¿½
 		Button registButton = (Button) findViewById(R.id.register);
 		
-		//ƒ‰ƒWƒIƒ{ƒ^ƒ“‚Éƒ`ƒFƒbƒN‚ğ‚Â‚¯‚é
+		//ï¿½ï¿½ï¿½Wï¿½Iï¿½{ï¿½^ï¿½ï¿½ï¿½Éƒ`ï¿½Fï¿½bï¿½Nï¿½ï¿½ï¿½Â‚ï¿½ï¿½ï¿½
 		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.sex_group);		
 		radioGroup.check(R.id.man);
 
 				
-		//‰Ÿ‚³‚ê‚½ƒ{ƒ^ƒ“‚ğ”»•Ê‚·‚é‚½‚ßAtag‚ğ•t—^‚·‚éB
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½{ï¿½^ï¿½ï¿½ï¿½ğ”»•Ê‚ï¿½ï¿½é‚½ï¿½ßAtagï¿½ï¿½tï¿½^ï¿½ï¿½ï¿½ï¿½B
 		registButton.setTag("insert");
 		
-		// ƒNƒŠƒbƒNƒŠƒXƒi[‚ÌÀs
+		// ï¿½Nï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½Xï¿½iï¿½[ï¿½Ìï¿½ï¿½s
 		registButtonClickListener regBCListerner = new registButtonClickListener();
 		registButton.setOnClickListener(regBCListerner);
 
-	    // DBì¬
+	    // DBï¿½ì¬
         helper = new CreateProductHelper(RegistFriendsActivity.this);		
 	}
 
-	// “o˜^ƒ{ƒ^ƒ“‚ÌƒNƒŠƒbƒNƒŠƒXƒi[‚Ì’è‹`
+	// ï¿½oï¿½^ï¿½{ï¿½^ï¿½ï¿½ï¿½ÌƒNï¿½ï¿½ï¿½bï¿½Nï¿½ï¿½ï¿½Xï¿½iï¿½[ï¿½Ì’ï¿½`
 	class registButtonClickListener implements OnClickListener {
 		public void onClick(View v) {
 			
-			//ƒ^ƒO‚Ìæ“¾i‚Ç‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Ì‚©”»•Êj
+			//ï¿½^ï¿½Oï¿½Ìæ“¾ï¿½iï¿½Ç‚Ìƒ{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½Êj
 			String tag = (String)v.getTag();
 			
-            // ŠY“–DBƒIƒuƒWƒFƒNƒgæ“¾
+            // ï¿½Yï¿½ï¿½DBï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½æ“¾
             db = helper.getWritableDatabase();
 			
-			//“o˜^ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½Û‚Ìˆ—
+			//ï¿½oï¿½^ï¿½{ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Û‚Ìï¿½ï¿½ï¿½
 			if(tag.equals("insert")){
 	
-				//—F’Bî•ñ‚Ì’Ç‰Áˆ—
+				//ï¿½Fï¿½Bï¿½ï¿½ï¿½Ì’Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½
 				try{
-					//ƒeƒLƒXƒgƒ{ƒbƒNƒX‚©‚ç–¼‘OAƒƒ‚‚ğæ“¾‚·‚é
+					//ï¿½eï¿½Lï¿½Xï¿½gï¿½{ï¿½bï¿½Nï¿½Xï¿½ï¿½ï¿½ç–¼ï¿½Oï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
 					EditText friendsNameText = (EditText) findViewById(R.id.friends_name);
 					EditText placeText = (EditText) findViewById(R.id.place);
 					EditText friendsMemoText = (EditText) findViewById(R.id.friends_memo);
@@ -76,19 +76,19 @@ public class RegistFriendsActivity extends Activity {
 					
 					if(friendsName != ""){
 						
-						//ƒeƒLƒXƒgƒ{ƒbƒNƒX‚Ìæ“¾“à—eŠm”F
+						//ï¿½eï¿½Lï¿½Xï¿½gï¿½{ï¿½bï¿½Nï¿½Xï¿½Ìæ“¾ï¿½ï¿½ï¿½eï¿½mï¿½F
 						//System.out.println(friendsName);
 						//System.out.println(friendsMemo);					
 						
 						
-						//ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚Ìó‘Ô‚ğæ“¾‚·‚é
+						//ï¿½`ï¿½Fï¿½bï¿½Nï¿½{ï¿½bï¿½Nï¿½Xï¿½Ìï¿½Ô‚ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
 						CheckBox checkbox = (CheckBox)findViewById(R.id.favoriteCheck);
 						Boolean favoriteCheck = checkbox.isChecked();										
 						
-						//ƒ`ƒFƒbƒNƒ{ƒbƒNƒX‚Ìæ“¾“à—eŠm”F
+						//ï¿½`ï¿½Fï¿½bï¿½Nï¿½{ï¿½bï¿½Nï¿½Xï¿½Ìæ“¾ï¿½ï¿½ï¿½eï¿½mï¿½F
 						System.out.println(favoriteCheck);
 						
-						//DB“o˜^—p‚ÉfavoriteFlg‚Ì’l‚ğŒˆ’è
+						//DBï¿½oï¿½^ï¿½pï¿½ï¿½favoriteFlgï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						int favoriteFlg;
 						
 						if(favoriteCheck == true){
@@ -98,36 +98,36 @@ public class RegistFriendsActivity extends Activity {
 						}
 						
 						
-						//”N—î‚ğæ“¾‚·‚é
+						//ï¿½Nï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
 						Spinner spinner =(Spinner)findViewById(R.id.age_list);
 						String ageSelect = (String)spinner.getSelectedItem();
 						int age = 0;
-						//DB‚É“o˜^‚·‚éage‚Ì’l‚ğŒˆ’è
-						if(ageSelect.equals("10‘ã")){
+						//DBï¿½É“oï¿½^ï¿½ï¿½ï¿½ï¿½ageï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+						if(ageSelect.equals("10ï¿½ï¿½")){
 							age = 0;
-						}else if(ageSelect.equals("20‘ã")){
+						}else if(ageSelect.equals("20ï¿½ï¿½")){
 							age = 1;
-						}else if(ageSelect.equals("30‘ã")){
+						}else if(ageSelect.equals("30ï¿½ï¿½")){
 							age = 2;
-						}else if(ageSelect.equals("40‘ã")){
+						}else if(ageSelect.equals("40ï¿½ï¿½")){
 							age = 3;
-						}else if(ageSelect.equals("50‘ã")){
+						}else if(ageSelect.equals("50ï¿½ï¿½")){
 							age = 4;
 						}
 						
 						
 						
-						//ƒ‰ƒWƒIƒ{ƒ^ƒ“‚Ì’l‚ğæ“¾‚·‚é
+						//ï¿½ï¿½ï¿½Wï¿½Iï¿½{ï¿½^ï¿½ï¿½ï¿½Ì’lï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½ï¿½
 						RadioGroup radioGroup = (RadioGroup) findViewById(R.id.sex_group);
 						RadioButton checkedButton =  (RadioButton) findViewById(radioGroup
 						        .getCheckedRadioButtonId());
 						String sexText = checkedButton.getText().toString();
 						System.out.println(sexText);
 	
-						//DB“o˜^—p‚Ésex‚Ì’l‚ğŒˆ’è
+						//DBï¿½oï¿½^ï¿½pï¿½ï¿½sexï¿½Ì’lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						int sex;
 						
-						if(sexText.equals("’j")){
+						if(sexText.equals("ï¿½j")){
 							sex = 0;
 						}else{
 							sex = 1;
@@ -135,28 +135,29 @@ public class RegistFriendsActivity extends Activity {
 						
 						RegistFriendsDao regFriendsDao = new RegistFriendsDao();
 						Context con = RegistFriendsActivity.this;
+						// @sugiim Inputã¯ãƒãƒ©ãƒãƒ©ã«æ¸¡ã™ã®ã§ã¯ãªãã€entityã«ã¾ã¨ã‚ã¦ã‹ã‚‰æ¸¡ã™ã¹ãï¼ˆä»•æ§˜å¤‰æ›´ã«å¼±ããªã‚‹ï¼‰
 						regFriendsDao.registDB(con,friendsName,meetPlace,friendsMemo,favoriteFlg,age,sex);
 						
 											
-						//Toast‚Å•\¦—p‚É‰ÁH
-						friendsName = friendsName + "‚³‚ñ‚ğ’Ç‰Á‚µ‚Ü‚µ‚½B";
+						//Toastï¿½Å•\ï¿½ï¿½ï¿½pï¿½É‰ï¿½ï¿½H
+						friendsName = friendsName + "ï¿½ï¿½ï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½B";
 											
-						// “o˜^‚µ‚½–¼‘O‚ğToast‚Å•\¦‚·‚éB
+						// ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Oï¿½ï¿½Toastï¿½Å•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½B
 						Toast.makeText(RegistFriendsActivity.this, friendsName, Toast.LENGTH_SHORT)
 							.show();
 										
-						// —F’B“o˜^Š®—¹‰æ–Ê‚É‘JˆÚ‚·‚éB
+						// ï¿½Fï¿½Bï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê‚É‘Jï¿½Ú‚ï¿½ï¿½ï¿½B
 						Intent registComplete = new Intent(RegistFriendsActivity.this, RegistResultActivity.class);
 						startActivity(registComplete);
 						
 					}else{
-						String insertErrorMessage = "–¼‘O‚ğ“ü—Í‚µ‚Ä‚­‚¾‚³‚¢";
+						String insertErrorMessage = "ï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½Í‚ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 						Toast.makeText(RegistFriendsActivity.this, insertErrorMessage, Toast.LENGTH_SHORT)
 						.show();
 					}
 					
 				}catch(Exception e){
-					String insertErrorMessage = "ƒf[ƒ^InsertƒGƒ‰[";
+					String insertErrorMessage = "ï¿½fï¿½[ï¿½^Insertï¿½Gï¿½ï¿½ï¿½[";
 					Toast.makeText(RegistFriendsActivity.this, insertErrorMessage, Toast.LENGTH_SHORT)
 					.show();
                 }						
