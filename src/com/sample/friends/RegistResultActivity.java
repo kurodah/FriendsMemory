@@ -12,7 +12,6 @@ public class RegistResultActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.regist_result);
 		
-		//ƒ{ƒ^ƒ“‚Ì“Á’è
 		Button menu_button=(Button)findViewById(R.id.menu_button);	  
 		menu_button.setOnClickListener(new View.OnClickListener() {
 			@Override

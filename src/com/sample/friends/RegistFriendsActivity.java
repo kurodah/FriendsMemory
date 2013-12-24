@@ -18,149 +18,146 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class RegistFriendsActivity extends Activity {
-	
-	//SQLiteDatabase�̒�`
+
+	// SQLiteDatabaseの定義
 	CreateProductHelper helper = null;
-    SQLiteDatabase db = null;	
-	
-	
+	SQLiteDatabase db = null;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.regist_friends);
-		
-		// �{�^���̓���
+
+		// ボタンの特定
 		Button registButton = (Button) findViewById(R.id.register);
-		
-		//���W�I�{�^���Ƀ`�F�b�N������
-		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.sex_group);		
+
+		// ラジオボタンにチェックをつける
+		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.sex_group);
 		radioGroup.check(R.id.man);
 
-				
-		//�����ꂽ�{�^���𔻕ʂ��邽�߁Atag��t�^����B
+		// 押されたボタンを判別するため、tagを付与する。
 		registButton.setTag("insert");
-		
-		// �N���b�N���X�i�[�̎��s
+
+		// クリックリスナーの実行
 		registButtonClickListener regBCListerner = new registButtonClickListener();
 		registButton.setOnClickListener(regBCListerner);
 
-	    // DB�쐬
-        helper = new CreateProductHelper(RegistFriendsActivity.this);		
+		// DB作成
+		helper = new CreateProductHelper(RegistFriendsActivity.this);
 	}
 
-	// �o�^�{�^���̃N���b�N���X�i�[�̒�`
+	// 登録ボタンのクリックリスナーの定義
 	class registButtonClickListener implements OnClickListener {
 		public void onClick(View v) {
-			
-			//�^�O�̎擾�i�ǂ̃{�^���������ꂽ�̂����ʁj
-			String tag = (String)v.getTag();
-			
-            // �Y��DB�I�u�W�F�N�g�擾
-            db = helper.getWritableDatabase();
-			
-			//�o�^�{�^���������ꂽ�ۂ̏���
-			if(tag.equals("insert")){
-	
-				//�F�B���̒ǉ�����
-				try{
-					//�e�L�X�g�{�b�N�X���疼�O�A�������擾����
+
+			// タグの取得（どのボタンが押されたのか判別）
+			String tag = (String) v.getTag();
+
+			// 該当DBオブジェクト取得
+			db = helper.getWritableDatabase();
+
+			// 登録ボタンが押された際の処理
+			if (tag.equals("insert")) {
+
+				// 友達情報の追加処理
+				try {
+					// テキストボックスから名前、メモを取得する
 					EditText friendsNameText = (EditText) findViewById(R.id.friends_name);
 					EditText placeText = (EditText) findViewById(R.id.place);
 					EditText friendsMemoText = (EditText) findViewById(R.id.friends_memo);
-		
+
 					String friendsName = friendsNameText.getText().toString();
 					String meetPlace = placeText.getText().toString();
 					String friendsMemo = friendsMemoText.getText().toString();
-					
+
 					System.out.println(friendsName);
-					
-					if(friendsName != ""){
-						
-						//�e�L�X�g�{�b�N�X�̎擾���e�m�F
-						//System.out.println(friendsName);
-						//System.out.println(friendsMemo);					
-						
-						
-						//�`�F�b�N�{�b�N�X�̏�Ԃ��擾����
-						CheckBox checkbox = (CheckBox)findViewById(R.id.favoriteCheck);
-						Boolean favoriteCheck = checkbox.isChecked();										
-						
-						//�`�F�b�N�{�b�N�X�̎擾���e�m�F
+
+					if (friendsName != "") {
+
+						// テキストボックスの取得内容確認
+						// System.out.println(friendsName);
+						// System.out.println(friendsMemo);
+
+						// チェックボックスの状態を取得する
+						CheckBox checkbox = (CheckBox) findViewById(R.id.favoriteCheck);
+						Boolean favoriteCheck = checkbox.isChecked();
+
+						// チェックボックスの取得内容確認
 						System.out.println(favoriteCheck);
-						
-						//DB�o�^�p��favoriteFlg�̒l������
+
+						// DB登録用にfavoriteFlgの値を決定
 						int favoriteFlg;
-						
-						if(favoriteCheck == true){
+
+						if (favoriteCheck == true) {
 							favoriteFlg = 1;
-						}else{
+						} else {
 							favoriteFlg = 0;
 						}
-						
-						
-						//�N����擾����
-						Spinner spinner =(Spinner)findViewById(R.id.age_list);
-						String ageSelect = (String)spinner.getSelectedItem();
+
+						// 年齢を取得する
+						Spinner spinner = (Spinner) findViewById(R.id.age_list);
+						String ageSelect = (String) spinner.getSelectedItem();
 						int age = 0;
-						//DB�ɓo�^����age�̒l������
-						if(ageSelect.equals("10��")){
+						// DBに登録するageの値を決定
+						if (ageSelect.equals("10代")) {
 							age = 0;
-						}else if(ageSelect.equals("20��")){
+						} else if (ageSelect.equals("20代")) {
 							age = 1;
-						}else if(ageSelect.equals("30��")){
+						} else if (ageSelect.equals("30代")) {
 							age = 2;
-						}else if(ageSelect.equals("40��")){
+						} else if (ageSelect.equals("40代")) {
 							age = 3;
-						}else if(ageSelect.equals("50��")){
+						} else if (ageSelect.equals("50代")) {
 							age = 4;
 						}
-						
-						
-						
-						//���W�I�{�^���̒l���擾����
+
+						// ラジオボタンの値を取得する
 						RadioGroup radioGroup = (RadioGroup) findViewById(R.id.sex_group);
-						RadioButton checkedButton =  (RadioButton) findViewById(radioGroup
-						        .getCheckedRadioButtonId());
+						RadioButton checkedButton = (RadioButton) findViewById(radioGroup
+								.getCheckedRadioButtonId());
 						String sexText = checkedButton.getText().toString();
 						System.out.println(sexText);
-	
-						//DB�o�^�p��sex�̒l������
+
+						// DB登録用にsexの値を決定
 						int sex;
-						
-						if(sexText.equals("�j")){
+
+						if (sexText.equals("男")) {
 							sex = 0;
-						}else{
+						} else {
 							sex = 1;
 						}
-						
+
 						RegistFriendsDao regFriendsDao = new RegistFriendsDao();
 						Context con = RegistFriendsActivity.this;
-						// @sugiim Inputはバラバラに渡すのではなく、entityにまとめてから渡すべき（仕様変更に弱くなる）
-						regFriendsDao.registDB(con,friendsName,meetPlace,friendsMemo,favoriteFlg,age,sex);
-						
-											
-						//Toast�ŕ\���p�ɉ��H
-						friendsName = friendsName + "�����ǉ����܂����B";
-											
-						// �o�^�������O��Toast�ŕ\������B
-						Toast.makeText(RegistFriendsActivity.this, friendsName, Toast.LENGTH_SHORT)
-							.show();
-										
-						// �F�B�o�^������ʂɑJ�ڂ���B
-						Intent registComplete = new Intent(RegistFriendsActivity.this, RegistResultActivity.class);
+						// @sugiim
+						// Inputはバラバラに渡すのではなく、entityにまとめてから渡すべき（仕様変更に弱くなる）
+						regFriendsDao.registDB(con, friendsName, meetPlace,
+								friendsMemo, favoriteFlg, age, sex);
+
+						// Toastで表示用に加工
+						friendsName = friendsName + "さんを追加しました。";
+
+						// 登録した名前をToastで表示する。
+						Toast.makeText(RegistFriendsActivity.this, friendsName,
+								Toast.LENGTH_SHORT).show();
+
+						// 友達登録完了画面に遷移する。
+						Intent registComplete = new Intent(
+								RegistFriendsActivity.this,
+								RegistResultActivity.class);
 						startActivity(registComplete);
-						
-					}else{
-						String insertErrorMessage = "���O���͂��Ă�������";
-						Toast.makeText(RegistFriendsActivity.this, insertErrorMessage, Toast.LENGTH_SHORT)
-						.show();
+
+					} else {
+						String insertErrorMessage = "名前を入力してください";
+						Toast.makeText(RegistFriendsActivity.this,
+								insertErrorMessage, Toast.LENGTH_SHORT).show();
 					}
-					
-				}catch(Exception e){
-					String insertErrorMessage = "�f�[�^Insert�G���[";
-					Toast.makeText(RegistFriendsActivity.this, insertErrorMessage, Toast.LENGTH_SHORT)
-					.show();
-                }						
+
+				} catch (Exception e) {
+					String insertErrorMessage = "データInsertエラー";
+					Toast.makeText(RegistFriendsActivity.this,
+							insertErrorMessage, Toast.LENGTH_SHORT).show();
+				}
 			}
 		}
 	}

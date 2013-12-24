@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 public class SearchResultActivity extends Activity {
 
-	// SQLiteDatabase‚Ì’è‹`
+	// SQLiteDatabaseã®å®šç¾©
 	CreateProductHelper helper = null;
 	SQLiteDatabase db = null;
 	public TextView txtInfo;
@@ -37,30 +37,30 @@ public class SearchResultActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_result);
 
-		// ƒe[ƒuƒ‹ƒŒƒCƒAƒEƒg‚Ìw’è
+		// ãƒ†ãƒ¼ãƒ–ãƒ«ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®æŒ‡å®š
 		TableLayout tableLayout = (TableLayout) findViewById(R.id.list);
-		// ƒe[ƒuƒ‹ƒŒƒCƒAƒEƒg‚ÌƒNƒŠƒA
+		// ãƒ†ãƒ¼ãƒ–ãƒ«ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®ã‚¯ãƒªã‚¢
 		tableLayout.removeAllViews();
 
-		// ”N—îE«•Ê‚Ì’è‹`
+		// å¹´é½¢ãƒ»æ€§åˆ¥ã®å®šç¾©
 		int searchSex;
 		int searchAge;
 
-		// ƒf[ƒ^‚Ìæ“¾
+		// ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
 		FriendsListEntity friListEntity = new FriendsListEntity();
 
 		Intent intent = getIntent();
-		// DTOƒf[ƒ^‚Ìó‚¯æ‚è
+		// DTOãƒ‡ãƒ¼ã‚¿ã®å—ã‘å–ã‚Š
 		friListEntity = (FriendsListEntity) intent
 				.getSerializableExtra("setData");
 
 		searchAge = friListEntity.getSearchAge();
 		searchSex = friListEntity.getSearchSex();
 
-		// ƒwƒbƒ_‚Ì•\¦
+		// ãƒ˜ãƒƒãƒ€ã®è¡¨ç¤º
 		TableRow headrow = new TableRow(SearchResultActivity.this);
 
-		// ƒwƒbƒ_‚Ì‘}“ü
+		// ãƒ˜ãƒƒãƒ€ã®æŒ¿å…¥
 		TextView headCheck = new TextView(SearchResultActivity.this);
 		headCheck.setText("ID");
 		headCheck.setBackgroundColor(Color.rgb(51, 153, 102));
@@ -68,44 +68,44 @@ public class SearchResultActivity extends Activity {
 		headCheck.setWidth(40);
 
 		TextView headName = new TextView(SearchResultActivity.this);
-		headName.setText("–¼‘O");
+		headName.setText("åå‰");
 		headName.setBackgroundColor(Color.rgb(51, 153, 102));
 		headName.setTextSize(12.0f);
 		headName.setWidth(220);
 
 		TextView headPlace = new TextView(SearchResultActivity.this);
-		headPlace.setText("êŠ");
+		headPlace.setText("å ´æ‰€");
 		headPlace.setBackgroundColor(Color.rgb(51, 153, 102));
 		headPlace.setTextSize(12.0f);
 		headPlace.setWidth(220);
 
 		TextView headMemo = new TextView(SearchResultActivity.this);
-		headMemo.setText("ƒƒ‚");
+		headMemo.setText("ãƒ¡ãƒ¢");
 		headMemo.setTextSize(12.0f);
 		headMemo.setBackgroundColor(Color.rgb(51, 153, 102));
 		headMemo.setWidth(220);
 
-		// Še—ñ‚ğsiƒwƒbƒ_j‚É’Ç‰Á
+		// å„åˆ—ã‚’è¡Œï¼ˆãƒ˜ãƒƒãƒ€ï¼‰ã«è¿½åŠ 
 		headrow.addView(headCheck);
 		headrow.addView(headName);
 		headrow.addView(headPlace);
 		headrow.addView(headMemo);
-		
-		
-        /**
-         * ˆÈ‰ºADB‚ÉŠi”[‚³‚ê‚Ä‚¢‚éƒf[ƒ^‚ğo—Í‚·‚éB
-         */
-        
-        Context con = SearchResultActivity.this;
-        SearchFriendsDao searchFriendsDao = new SearchFriendsDao(); 
-        List<FriendsListEntity> friendsList =  searchFriendsDao.searchDB(con, searchAge, searchSex);
-        
-        //s‚ğÈX‚É‚·‚é‚½‚ß‚Ì•Ï”
-        int rowColor = 0;
+
+		/**
+		 * ä»¥ä¸‹ã€DBã«æ ¼ç´ã•ã‚Œã¦ã„ã‚‹ãƒ‡ãƒ¼ã‚¿ã‚’å‡ºåŠ›ã™ã‚‹ã€‚
+		 */
+
+		Context con = SearchResultActivity.this;
+		SearchFriendsDao searchFriendsDao = new SearchFriendsDao();
+		List<FriendsListEntity> friendsList = searchFriendsDao.searchDB(con,
+				searchAge, searchSex);
+
+		// è¡Œã‚’ç¸ã€…ã«ã™ã‚‹ãŸã‚ã®å¤‰æ•°
+		int rowColor = 0;
 
 		if (friendsList != null) {
 
-			// Šg’£For•¶‚ÅDB‚©‚çæ“¾‚µ‚½ƒf[ƒ^‚ğæ‚èo‚·
+			// æ‹¡å¼µForæ–‡ã§DBã‹ã‚‰å–å¾—ã—ãŸãƒ‡ãƒ¼ã‚¿ã‚’å–ã‚Šå‡ºã™
 			for (FriendsListEntity friendsListEntity : friendsList) {
 
 				String lineFriendsIDText;
@@ -113,64 +113,59 @@ public class SearchResultActivity extends Activity {
 				String lineFriendsMemoText;
 				String linePlaceText;
 				int favoriteFlg;
-				
+
 				TableRow lineRow = new TableRow(SearchResultActivity.this);
-	
 
 				lineFriendsIDText = friendsListEntity.getFriendsID();
 				lineFriendsNameText = friendsListEntity.getFriendsName();
 				lineFriendsMemoText = friendsListEntity.getFriendsName();
 				linePlaceText = friendsListEntity.getMeetPlace();
 				favoriteFlg = friendsListEntity.getFavoriteFlg();
-				
-				
-                //‚¨‹C‚É“ü‚è‚Ì”»•Ê
-                if(favoriteFlg == 1){
-                	lineFriendsNameText = "" + lineFriendsNameText;
-                }
-				
-				
-                //ID‚Ìæ“¾
-                TextView frinedsID = new TextView(SearchResultActivity.this);
-                frinedsID.setGravity(Gravity.LEFT);
-                frinedsID.setTextSize(12.0f);
-                frinedsID.setText(lineFriendsIDText);
-                
-                //–¼‘O‚Ìæ“¾
-                TextView frinedsName = new TextView(SearchResultActivity.this);
-                frinedsName.setGravity(Gravity.LEFT);
-                frinedsName.setTextSize(12.0f);
-                frinedsName.setText(lineFriendsNameText);
-                                               
-                //ƒƒ‚‚Ìæ“¾
-                TextView frinedsMemo = new TextView(SearchResultActivity.this);
-                frinedsMemo.setGravity(Gravity.LEFT);
-                frinedsMemo.setTextSize(12.0f);
-                frinedsMemo.setText(lineFriendsMemoText);
-                
-                //êŠ‚Ìæ“¾
-                TextView place = new TextView(SearchResultActivity.this);
-                place.setGravity(Gravity.LEFT);
-                place.setTextSize(12.0f);
-                place.setText(linePlaceText);
-                
-                
-                lineRow.addView(frinedsID);
-                lineRow.addView(frinedsName);
-                lineRow.addView(frinedsMemo);  
-                lineRow.addView(place);
-				
-                if(rowColor%2 == 1){
-                	lineRow.setBackgroundColor(Color.rgb(204,255,204));
-                }
-                
-                tableLayout.addView(lineRow);
-                
-                
+
+				// ãŠæ°—ã«å…¥ã‚Šã®åˆ¤åˆ¥
+				if (favoriteFlg == 1) {
+					lineFriendsNameText = "â—" + lineFriendsNameText;
+				}
+
+				// IDã®å–å¾—
+				TextView frinedsID = new TextView(SearchResultActivity.this);
+				frinedsID.setGravity(Gravity.LEFT);
+				frinedsID.setTextSize(12.0f);
+				frinedsID.setText(lineFriendsIDText);
+
+				// åå‰ã®å–å¾—
+				TextView frinedsName = new TextView(SearchResultActivity.this);
+				frinedsName.setGravity(Gravity.LEFT);
+				frinedsName.setTextSize(12.0f);
+				frinedsName.setText(lineFriendsNameText);
+
+				// ãƒ¡ãƒ¢ã®å–å¾—
+				TextView frinedsMemo = new TextView(SearchResultActivity.this);
+				frinedsMemo.setGravity(Gravity.LEFT);
+				frinedsMemo.setTextSize(12.0f);
+				frinedsMemo.setText(lineFriendsMemoText);
+
+				// å ´æ‰€ã®å–å¾—
+				TextView place = new TextView(SearchResultActivity.this);
+				place.setGravity(Gravity.LEFT);
+				place.setTextSize(12.0f);
+				place.setText(linePlaceText);
+
+				lineRow.addView(frinedsID);
+				lineRow.addView(frinedsName);
+				lineRow.addView(frinedsMemo);
+				lineRow.addView(place);
+
+				if (rowColor % 2 == 1) {
+					lineRow.setBackgroundColor(Color.rgb(204, 255, 204));
+				}
+
+				tableLayout.addView(lineRow);
+
 			}
 		}
 
-		// ƒ{ƒ^ƒ“‚Ì“Á’è
+		// ãƒœã‚¿ãƒ³ã®ç‰¹å®š
 		Button menuButton = (Button) findViewById(R.id.menu_button);
 		Button deleteButton = (Button) findViewById(R.id.delete_button);
 		menuButtonClickListener menuBCListerner = new menuButtonClickListener();
@@ -198,7 +193,7 @@ public class SearchResultActivity extends Activity {
 			try {
 				db.execSQL(deleteFriendsSQL);
 			} catch (Exception e) {
-				String insertErrorMessage = "ID‚ª•s³‚Å‚·B";
+				String insertErrorMessage = "IDãŒä¸æ­£ã§ã™ã€‚";
 				Toast.makeText(SearchResultActivity.this, insertErrorMessage,
 						Toast.LENGTH_SHORT).show();
 			}

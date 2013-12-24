@@ -17,150 +17,149 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class SearchFriendsActivity extends Activity {
-	
-	//SQLiteDatabase‚Ì’è‹`
+
+	// SQLiteDatabaseã®å®šç¾©
 	CreateProductHelper helper = null;
-    SQLiteDatabase db = null;		
-	
-	protected void onCreate(Bundle savedInstanceState){
+	SQLiteDatabase db = null;
+
+	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_friends);
-		
-		//ƒ‰ƒWƒIƒ{ƒ^ƒ“‚Éƒ`ƒFƒbƒN‚ğ‚Â‚¯‚é
-		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.sex_group);		
-		radioGroup.check(R.id.man);		
-		
-		// ‰Ÿ‚³‚ê‚½ƒ{ƒ^ƒ“‚É‰‚¶‚ÄAƒ^ƒO‚ğ•t—^‚·‚é
+
+		// ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã«ãƒã‚§ãƒƒã‚¯ã‚’ã¤ã‘ã‚‹
+		RadioGroup radioGroup = (RadioGroup) findViewById(R.id.sex_group);
+		radioGroup.check(R.id.man);
+
+		// æŠ¼ã•ã‚ŒãŸãƒœã‚¿ãƒ³ã«å¿œã˜ã¦ã€ã‚¿ã‚°ã‚’ä»˜ä¸ã™ã‚‹
 		Button searchButton = (Button) findViewById(R.id.search_button);
 		searchButton.setTag("search");
 		Button menuButton = (Button) findViewById(R.id.menu_button);
-		menuButton.setTag("menu");		
-		
-		
-		// ƒNƒŠƒbƒNƒŠƒXƒi[‚ÌÀs
+		menuButton.setTag("menu");
+
+		// ã‚¯ãƒªãƒƒã‚¯ãƒªã‚¹ãƒŠãƒ¼ã®å®Ÿè¡Œ
 		SearchMenuClickListener searchBCListerner = new SearchMenuClickListener();
 		searchButton.setOnClickListener(searchBCListerner);
-		menuButton.setOnClickListener(searchBCListerner);	
-		
-		
-	    // DBì¬
-        helper = new CreateProductHelper(SearchFriendsActivity.this);		
+		menuButton.setOnClickListener(searchBCListerner);
+
+		// DBä½œæˆ
+		helper = new CreateProductHelper(SearchFriendsActivity.this);
 	}
-	
-	
+
 	class SearchMenuClickListener implements OnClickListener {
 		public void onClick(View v) {
-			//DBˆ—‚Ì’Ç‰Á
+			// DBå‡¦ç†ã®è¿½åŠ 
 			db = helper.getWritableDatabase();
-			
-			//ƒ^ƒO‚Ìæ“¾i‚Ç‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½‚Ì‚©”»•Êj
-			String tag = (String)v.getTag();
+
+			// ã‚¿ã‚°ã®å–å¾—ï¼ˆã©ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸã®ã‹åˆ¤åˆ¥ï¼‰
+			String tag = (String) v.getTag();
 			System.out.println(tag);
-			
-			
-			//“o˜^ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½Û‚Ìˆ—
-			if(tag.equals("search")){
-				
-				//ƒJ[ƒ\ƒ‹‚ÌéŒ¾
-				Cursor c = null; 
-				
-				try{
-						
-					//ƒ‰ƒWƒIƒ{ƒ^ƒ“‚Ì‚Ì’l‚ğæ“¾‚·‚é
+
+			// ç™»éŒ²ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸéš›ã®å‡¦ç†
+			if (tag.equals("search")) {
+
+				// ã‚«ãƒ¼ã‚½ãƒ«ã®å®£è¨€
+				Cursor c = null;
+
+				try {
+
+					// ãƒ©ã‚¸ã‚ªãƒœã‚¿ãƒ³ã®ã®å€¤ã‚’å–å¾—ã™ã‚‹
 					RadioGroup radioGroup = (RadioGroup) findViewById(R.id.sex_group);
-					RadioButton checkedButton =  (RadioButton) findViewById(radioGroup
-					        .getCheckedRadioButtonId());
+					RadioButton checkedButton = (RadioButton) findViewById(radioGroup
+							.getCheckedRadioButtonId());
 					String sexText = checkedButton.getText().toString();
 					System.out.println(sexText);
-		
-					//DBŒŸõ—p‚Ésex‚Ì’l‚ğŒˆ’è
+
+					// DBæ¤œç´¢ç”¨ã«sexã®å€¤ã‚’æ±ºå®š
 					int searchSex;
-					
-					if(sexText.equals("’j")){
+
+					if (sexText.equals("ç”·")) {
 						searchSex = 0;
-					}else{
+					} else {
 						searchSex = 1;
 					}
-		
-					//”N—î‚ğæ“¾‚·‚é
-					Spinner spinner =(Spinner)findViewById(R.id.age_list);
+
+					// å¹´é½¢ã‚’å–å¾—ã™ã‚‹
+					Spinner spinner = (Spinner) findViewById(R.id.age_list);
 					System.out.println(spinner);
-					String ageSelect = (String)spinner.getSelectedItem();
+					String ageSelect = (String) spinner.getSelectedItem();
 					int searchAge = 0;
-					//DB‚É“o˜^‚·‚éage‚Ì’l‚ğŒˆ’è
-					if(ageSelect.equals("10‘ã")){
+					// DBã«ç™»éŒ²ã™ã‚‹ageã®å€¤ã‚’æ±ºå®š
+					if (ageSelect.equals("10ä»£")) {
 						searchAge = 0;
-					}else if(ageSelect.equals("20‘ã")){
+					} else if (ageSelect.equals("20ä»£")) {
 						searchAge = 1;
-					}else if(ageSelect.equals("30‘ã")){
+					} else if (ageSelect.equals("30ä»£")) {
 						searchAge = 2;
-					}else if(ageSelect.equals("40‘ã")){
+					} else if (ageSelect.equals("40ä»£")) {
 						searchAge = 3;
-					}else if(ageSelect.equals("50‘ã")){
+					} else if (ageSelect.equals("50ä»£")) {
 						searchAge = 4;
 					}
-					
-					
-					
-					
-					
-					//SQL‚ÅDB‚ğŒŸõ
-					String searchCountSQL = "select count(*) from friendsList where age=" +
-							"'" + searchAge + "' and sex = '" + searchSex  + "'";
+
+					// SQLã§DBã‚’æ¤œç´¢
+					String searchCountSQL = "select count(*) from friendsList where age="
+							+ "'"
+							+ searchAge
+							+ "' and sex = '"
+							+ searchSex
+							+ "'";
 					System.out.println(searchCountSQL);
 					c = db.rawQuery(searchCountSQL, null);
-				    c.moveToLast();
-				    long count = c.getLong(0);
-				    
-				    System.out.println(count);
-				    
-				    //æ“¾Œ”‚Ìƒ`ƒFƒbƒN
-				    if(count == 0){
-				    	//‰æ–Ê‘JˆÚ‚ğs‚í‚¸‚ÉƒƒbƒZ[ƒW‚ğ•\¦‚·‚é
-				    	String insertErrorMessage = "—F’B‚ª“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñBğŒ‚ğ•ÏX‚µ‚Ä‚­‚¾‚³‚¢B";
-						Toast.makeText(SearchFriendsActivity.this, insertErrorMessage, Toast.LENGTH_SHORT)
-						.show();
-				    }else{
-				    	FriendsListEntity friListEntity = new FriendsListEntity();
-				    	//System.out.println("ƒZƒbƒg‘O");
-				    	//System.out.println(searchSex);
-				    	//System.out.println(searchAge);
-				    	friListEntity.setSearchSex(searchSex);
-				    	friListEntity.setSearchAge(searchAge);
-				    	
-				        int newsex = friListEntity.getSearchSex();
-				        int newage = friListEntity.getSearchAge();				
-				        //System.out.println("ƒQƒbƒgŒã");
-				        //System.out.println(newsex);
-				        //System.out.println(newage);
-				    
-						//Ÿ‰æ–Ê‚É‘JˆÚ
-						Intent intentSearchResult = new Intent(SearchFriendsActivity.this, SearchResultActivity.class);
+					c.moveToLast();
+					long count = c.getLong(0);
+
+					System.out.println(count);
+
+					// å–å¾—ä»¶æ•°ã®ãƒã‚§ãƒƒã‚¯
+					if (count == 0) {
+						// ç”»é¢é·ç§»ã‚’è¡Œã‚ãšã«ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’è¡¨ç¤ºã™ã‚‹
+						String insertErrorMessage = "å‹é”ãŒç™»éŒ²ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚æ¡ä»¶ã‚’å¤‰æ›´ã—ã¦ãã ã•ã„ã€‚";
+						Toast.makeText(SearchFriendsActivity.this,
+								insertErrorMessage, Toast.LENGTH_SHORT).show();
+					} else {
+						FriendsListEntity friListEntity = new FriendsListEntity();
+						// System.out.println("ã‚»ãƒƒãƒˆå‰");
+						// System.out.println(searchSex);
+						// System.out.println(searchAge);
+						friListEntity.setSearchSex(searchSex);
+						friListEntity.setSearchAge(searchAge);
+
+						int newsex = friListEntity.getSearchSex();
+						int newage = friListEntity.getSearchAge();
+						// System.out.println("ã‚²ãƒƒãƒˆå¾Œ");
+						// System.out.println(newsex);
+						// System.out.println(newage);
+
+						// æ¬¡ç”»é¢ã«é·ç§»
+						Intent intentSearchResult = new Intent(
+								SearchFriendsActivity.this,
+								SearchResultActivity.class);
 						intentSearchResult.putExtra("setData", friListEntity);
-						
-						// ŒŸõŒ‹‰Ê‰æ–Ê‚É‘JˆÚ‚·‚é
-						startActivity(intentSearchResult);		
-				    }
-				}catch(Exception e){
-					String insertErrorMessage = "ƒf[ƒ^ŒŸõƒGƒ‰[";
-					Toast.makeText(SearchFriendsActivity.this, insertErrorMessage, Toast.LENGTH_SHORT)
-					.show();
+
+						// æ¤œç´¢çµæœç”»é¢ã«é·ç§»ã™ã‚‹
+						startActivity(intentSearchResult);
+					}
+				} catch (Exception e) {
+					String insertErrorMessage = "ãƒ‡ãƒ¼ã‚¿æ¤œç´¢ã‚¨ãƒ©ãƒ¼";
+					Toast.makeText(SearchFriendsActivity.this,
+							insertErrorMessage, Toast.LENGTH_SHORT).show();
 					System.err.println(e.getMessage());
-				}finally{
-					if(c != null){
+				} finally {
+					if (c != null) {
 						c.close();
 					}
 				}
 			}
-			
-			//ƒƒjƒ…[ƒ{ƒ^ƒ“‚É–ß‚éˆ—
-			if(tag.equals("menu")){
-				
-			    // ƒCƒ“ƒeƒ“ƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX¶¬
-				Intent intentMenu = new Intent(SearchFriendsActivity.this, MainActivity.class);
-				// ƒƒjƒ…[‰æ–Ê‚É‘JˆÚ‚·‚é
-				startActivity(intentMenu);				
+
+			// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒœã‚¿ãƒ³ã«æˆ»ã‚‹å‡¦ç†
+			if (tag.equals("menu")) {
+
+				// ã‚¤ãƒ³ãƒ†ãƒ³ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
+				Intent intentMenu = new Intent(SearchFriendsActivity.this,
+						MainActivity.class);
+				// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ç”»é¢ã«é·ç§»ã™ã‚‹
+				startActivity(intentMenu);
 			}
-		}	
+		}
 	}
 }

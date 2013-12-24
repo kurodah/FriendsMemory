@@ -30,15 +30,15 @@ public class SearchFriendsDao extends Activity{
 		int favoriteFlg;
 
 
-    	// Test�f�[�^
+		 // Testデータ
         List<FriendsListEntity> friendsList = null;
    
         try {
         		
-        	//DB�g�p�̏���
+        	//DB使用の準備
         	db = helper.getWritableDatabase();
         		
-        	//SQL���̏����Ǝ��s
+        	//SQL文の準備と実行
 			String searchResultSQL = "select * from friendsList where age="
 					+ "'" + searchAge + "' and sex = '" + searchSex + "'";
         	c = db.rawQuery(searchResultSQL, null);

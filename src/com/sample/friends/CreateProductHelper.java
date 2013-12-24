@@ -6,13 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class CreateProductHelper  extends SQLiteOpenHelper{
     
-    // ƒRƒ“ƒXƒgƒ‰ƒNƒ^’è‹`
+    // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å®šç¾©
     public CreateProductHelper(Context con){
-        // SQLiteOpenHelper‚ÌƒRƒ“ƒXƒgƒ‰ƒNƒ^ŒÄ‚Ño‚µ
+        // SQLiteOpenHelperã®ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿å‘¼ã³å‡ºã—
         super(con,"friendsDB",null,1);
     }
         
-    // onCreateƒƒ\ƒbƒh
+    //onCreateãƒ¡ã‚½ãƒƒãƒ‰
     @Override
     public void onCreate(SQLiteDatabase db) {    
 		String createTableSql 
@@ -24,11 +24,11 @@ public class CreateProductHelper  extends SQLiteOpenHelper{
 		  "favoriteFlg int," +
 		  "sex int)";				
 		
-		// SQLÀs
+		// SQLå®Ÿè¡Œ
 		db.execSQL(createTableSql);    	
     }
     
-    // onUpgradeƒƒ\ƒbƒh
+    // onUpgradeãƒ¡ã‚½ãƒƒãƒ‰
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldversion, int newversion) {
     }

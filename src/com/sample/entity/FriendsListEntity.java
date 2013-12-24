@@ -59,10 +59,10 @@ public class FriendsListEntity implements Serializable {
 		this.meetPlace = meetPlace;
 	}
 
-	// «•Ê‚ÌŒŸõ’l
+	// ?????????l
 	private int searchSex;
 
-	// ”N—î‚ÌŒŸõ’l
+	// ?N???????l
 	private int searchAge;
 
 	public int getSearchSex() {

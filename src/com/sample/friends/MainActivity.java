@@ -1,6 +1,5 @@
 package com.sample.friends;
 
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,32 +12,34 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_menu);
-		
-		//ƒ{ƒ^ƒ“‚Ì“Á’è
-		  Button registButton=(Button)findViewById(R.id.registMenu_button);
-		  Button searchButton=(Button)findViewById(R.id.searchMenu_button);
-		  
-		  //“o˜^ƒƒjƒ…[‚Öƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½ê‡‚Ìˆ—
-		  registButton.setOnClickListener(new View.OnClickListener() {
-			  @Override
-			  public void onClick(View v) {
-					// ƒCƒ“ƒeƒ“ƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX¶¬
-					Intent intentRegistMenu = new Intent(MainActivity.this, RegistFriendsActivity.class);
-					// “o˜^ƒƒjƒ…[‚ÌƒAƒNƒeƒBƒrƒeƒB‹N“®
-					startActivity(intentRegistMenu);
-			  }
-		  });
 
-		//ŒŸõƒƒjƒ…[‚Öƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½ê‡‚Ìˆ—
-		  searchButton.setOnClickListener(new View.OnClickListener() {
-			  @Override
-			  public void onClick(View v) {
-					// ƒCƒ“ƒeƒ“ƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒX¶¬
-					Intent intentSearchMenu = new Intent(MainActivity.this, SearchFriendsActivity.class);
-					// “o˜^ƒƒjƒ…[‚ÌƒAƒNƒeƒBƒrƒeƒB‹N“®
-					startActivity(intentSearchMenu);
-			  }
-		  });		  
-		  
-	}	
+		// ãƒœã‚¿ãƒ³ã®ç‰¹å®š
+		Button registButton = (Button) findViewById(R.id.registMenu_button);
+		Button searchButton = (Button) findViewById(R.id.searchMenu_button);
+
+		// ç™»éŒ²ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã¸ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸå ´åˆã®å‡¦ç†
+		registButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// // ã‚¤ãƒ³ãƒ†ãƒ³ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
+				Intent intentRegistMenu = new Intent(MainActivity.this,
+						RegistFriendsActivity.class);
+				// ç™»éŒ²ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£èµ·å‹•
+				startActivity(intentRegistMenu);
+			}
+		});
+
+		// æ¤œç´¢ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã¸ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸå ´åˆã®å‡¦ç†
+		searchButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// ã‚¤ãƒ³ãƒ†ãƒ³ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ
+				Intent intentSearchMenu = new Intent(MainActivity.this,
+						SearchFriendsActivity.class);
+				// ç™»éŒ²ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ã‚¢ã‚¯ãƒ†ã‚£ãƒ“ãƒ†ã‚£èµ·å‹•
+				startActivity(intentSearchMenu);
+			}
+		});
+
+	}
 }
