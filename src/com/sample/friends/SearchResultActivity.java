@@ -97,72 +97,79 @@ public class SearchResultActivity extends Activity {
 
 		Context con = SearchResultActivity.this;
 		SearchFriendsDao searchFriendsDao = new SearchFriendsDao();
-		List<FriendsListEntity> friendsList = searchFriendsDao.searchDB(con,
-				searchAge, searchSex);
+		List<FriendsListEntity> friendsList;
+		try {
+			friendsList = searchFriendsDao.searchDB(con, searchAge, searchSex);
 
-		// 行を縞々にするための変数
-		int rowColor = 0;
+			// 行を縞々にするための変数
+			int rowColor = 0;
 
-		if (friendsList != null) {
+			if (friendsList != null) {
 
-			// 拡張For文でDBから取得したデータを取り出す
-			for (FriendsListEntity friendsListEntity : friendsList) {
+				// 拡張For文でDBから取得したデータを取り出す
+				for (FriendsListEntity friendsListEntity : friendsList) {
 
-				String lineFriendsIDText;
-				String lineFriendsNameText;
-				String lineFriendsMemoText;
-				String linePlaceText;
-				int favoriteFlg;
+					String lineFriendsIDText;
+					String lineFriendsNameText;
+					String lineFriendsMemoText;
+					String linePlaceText;
+					int favoriteFlg;
 
-				TableRow lineRow = new TableRow(SearchResultActivity.this);
+					TableRow lineRow = new TableRow(SearchResultActivity.this);
 
-				lineFriendsIDText = friendsListEntity.getFriendsID();
-				lineFriendsNameText = friendsListEntity.getFriendsName();
-				lineFriendsMemoText = friendsListEntity.getFriendsName();
-				linePlaceText = friendsListEntity.getMeetPlace();
-				favoriteFlg = friendsListEntity.getFavoriteFlg();
+					lineFriendsIDText = friendsListEntity.getFriendsID();
+					lineFriendsNameText = friendsListEntity.getFriendsName();
+					lineFriendsMemoText = friendsListEntity.getFriendsName();
+					linePlaceText = friendsListEntity.getMeetPlace();
+					favoriteFlg = friendsListEntity.getFavoriteFlg();
 
-				// お気に入りの判別
-				if (favoriteFlg == 1) {
-					lineFriendsNameText = "◎" + lineFriendsNameText;
+					// お気に入りの判別
+					if (favoriteFlg == 1) {
+						lineFriendsNameText = "◎" + lineFriendsNameText;
+					}
+
+					// IDの取得
+					TextView frinedsID = new TextView(SearchResultActivity.this);
+					frinedsID.setGravity(Gravity.LEFT);
+					frinedsID.setTextSize(12.0f);
+					frinedsID.setText(lineFriendsIDText);
+
+					// 名前の取得
+					TextView frinedsName = new TextView(
+							SearchResultActivity.this);
+					frinedsName.setGravity(Gravity.LEFT);
+					frinedsName.setTextSize(12.0f);
+					frinedsName.setText(lineFriendsNameText);
+
+					// メモの取得
+					TextView frinedsMemo = new TextView(
+							SearchResultActivity.this);
+					frinedsMemo.setGravity(Gravity.LEFT);
+					frinedsMemo.setTextSize(12.0f);
+					frinedsMemo.setText(lineFriendsMemoText);
+
+					// 場所の取得
+					TextView place = new TextView(SearchResultActivity.this);
+					place.setGravity(Gravity.LEFT);
+					place.setTextSize(12.0f);
+					place.setText(linePlaceText);
+
+					lineRow.addView(frinedsID);
+					lineRow.addView(frinedsName);
+					lineRow.addView(frinedsMemo);
+					lineRow.addView(place);
+
+					if (rowColor % 2 == 1) {
+						lineRow.setBackgroundColor(Color.rgb(204, 255, 204));
+					}
+
+					tableLayout.addView(lineRow);
+
 				}
-
-				// IDの取得
-				TextView frinedsID = new TextView(SearchResultActivity.this);
-				frinedsID.setGravity(Gravity.LEFT);
-				frinedsID.setTextSize(12.0f);
-				frinedsID.setText(lineFriendsIDText);
-
-				// 名前の取得
-				TextView frinedsName = new TextView(SearchResultActivity.this);
-				frinedsName.setGravity(Gravity.LEFT);
-				frinedsName.setTextSize(12.0f);
-				frinedsName.setText(lineFriendsNameText);
-
-				// メモの取得
-				TextView frinedsMemo = new TextView(SearchResultActivity.this);
-				frinedsMemo.setGravity(Gravity.LEFT);
-				frinedsMemo.setTextSize(12.0f);
-				frinedsMemo.setText(lineFriendsMemoText);
-
-				// 場所の取得
-				TextView place = new TextView(SearchResultActivity.this);
-				place.setGravity(Gravity.LEFT);
-				place.setTextSize(12.0f);
-				place.setText(linePlaceText);
-
-				lineRow.addView(frinedsID);
-				lineRow.addView(frinedsName);
-				lineRow.addView(frinedsMemo);
-				lineRow.addView(place);
-
-				if (rowColor % 2 == 1) {
-					lineRow.setBackgroundColor(Color.rgb(204, 255, 204));
-				}
-
-				tableLayout.addView(lineRow);
-
 			}
+		} catch (Exception e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		}
 
 		// ボタンの特定

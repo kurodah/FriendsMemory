@@ -2,6 +2,7 @@ package com.sample.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.sample.friends.CreateProductHelper;
@@ -28,15 +29,14 @@ public class RegistFriendsDao {
 
 
                 } catch (Exception e) {
-                        
+                	
+                		Log.v("tag", "DB登録エラー");
                         // @sugiim メッセージはリソースファイルなどに定義すべき
-                        String failMessage = "失敗パターン";
-                        
-                        
+                        //String failMessage = "失敗パターン";
                         // @sugiim DaoでToastを扱うのは不適切すぎ。
                         // Daoの役割としてはエラーがあったこと、エラーの内容を返却するだけとする。表示の制御はActivityで行うべき。
-                        Toast.makeText(con, failMessage,
-                                        Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(con, failMessage,
+                        //                Toast.LENGTH_SHORT).show();
                 } finally {
                         db.close();
                 }
